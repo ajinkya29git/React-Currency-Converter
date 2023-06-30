@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import CurrencyRow from './CurrencyRow'
 
-const BASE_URL = 'https://api.exchangeratesapi.io/latest'
+const ACCESS_KEY = "OZF3Y30jeQ8cRrGQLHZ7atZC6Oc1QXPO"
+// const BASE_URL = `https://api.apilayer.com/exchangerates_data/latest?access_key=${ACCESS_KEY}`
+const BASE_URL = "https://api.apilayer.com/exchangerates_data/latest"
 
 function App() {
   // const [currencyOptions, setCurrencyOptions] = useState([])
@@ -21,17 +23,30 @@ function App() {
   //   fromAmount = amount / exchangeRate
   // }
 
-  // useEffect(() => {
-  //   fetch(BASE_URL)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       const firstCurrency = Object.keys(data.rates)[0]
-  //       setCurrencyOptions([data.base, ...Object.keys(data.rates)])
-  //       setFromCurrency(data.base)
-  //       setToCurrency(firstCurrency)
-  //       setExchangeRate(data.rates[firstCurrency])
-  //     })
-  // }, [])
+  useEffect(() => {
+    var myHeaders = new Headers();
+    myHeaders.append("apikey", "OZF3Y30jeQ8cRrGQLHZ7atZC6Oc1QXPO");
+    
+    // var requestOptions = {
+    //   method: 'GET',
+    //   redirect: 'follow',
+    //   headers: myHeaders
+    // };
+    
+    fetch(BASE_URL, {
+      method: 'GET',
+      redirect: 'follow',
+      headers: myHeaders
+    })
+      .then(res => res.json())
+      .then(data => console.log(data)
+        
+        // setCurrencyOptions([data.base, ...Object.keys(data.rates)])
+        // setFromCurrency(data.base)
+        // setToCurrency(firstCurrency)
+        // setExchangeRate(data.rates[firstCurrency])
+      )
+  }, [])
 
   // useEffect(() => {
   //   if (fromCurrency != null && toCurrency != null) {
